@@ -1,0 +1,30 @@
+[
+  {
+    "controller": "user-profile",
+    "permissions_title": "user-profile"
+  },
+  {
+    "controller": "table-list",
+    "permissions_title": "table-list"
+  },
+  {
+    "controller": "typography",
+    "permissions_title": "typography"
+  },
+  {
+    "controller": "icons",
+    "permissions_title": "icons"
+  },
+  {
+    "controller": "maps",
+    "permissions_title": "maps"
+  },
+  {
+    "controller": "notifications",
+    "permissions_title": "notifications"
+  },
+  {
+    "controller": "upgrade",
+    "permissions_title": "upgrade"
+  }
+]

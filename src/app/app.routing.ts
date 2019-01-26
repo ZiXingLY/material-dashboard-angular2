@@ -4,8 +4,10 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import {PassportComponent} from './layouts/passport/passport.component';
+import {UserLoginComponent} from './layouts/pages/passport/login/login.component';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
@@ -16,8 +18,15 @@ const routes: Routes =[
     children: [
         {
       path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]}
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'}
+      ]
+    }, {
+        path: 'passport',
+        component: PassportComponent,
+        children: [
+            {path: '', loadChildren: './layouts/passport/passport.module#PassportModule'}
+            ]
+}
     // { path: 'dashboard',      component: DashboardComponent },
     // { path: 'user-profile',   component: UserProfileComponent },
     // { path: 'table-list',     component: TableListComponent },
