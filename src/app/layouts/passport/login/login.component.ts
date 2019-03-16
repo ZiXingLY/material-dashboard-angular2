@@ -12,6 +12,7 @@ import {SnackbarService} from '../../../services/snackbar.service';
 export class LoginComponent implements OnInit {
     public userName: any;
     public passWord: any;
+    public token;
 
     constructor(private http: HttpClient,
                 private router: Router,
@@ -31,13 +32,14 @@ export class LoginComponent implements OnInit {
             alert('请输入密码');
         } else {
             const params = {
-                account: this.userName,
+                phone: this.userName,
                 password: this.passWord
             };
             // this.loading.show();
-            this.http.get(ROOT_URL + 'sys/admin/login', {params}).subscribe((result) => {
+            this.http.post(ROOT_URL + 'user/ajaxLogin', params, {headers: {'cookies': 'hhhhh', 'Content-Type': 'application/json;charset=UTF-8'}, withCredentials: true}).subscribe((result) => {
                 // this.loading.hide();
                 if (result['code'] === 0) {
+                    this.token = result['data'];
                     localStorage.userName = this.userName;
                     // localStorage.tokenTime = result['admin']['time'];
                     localStorage.id = result['data']['admin']['id'];
@@ -52,6 +54,12 @@ export class LoginComponent implements OnInit {
                 }
             });
         }
+    }
+    sendToken() {
+
+        this.http.post(ROOT_URL + '/vip/add', {name: 'hang'}, {headers: {'x-auth-token': this.token}}).subscribe(res => {
+            console.log(res);
+        })
     }
 
 }

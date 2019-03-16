@@ -1,8 +1,13 @@
 <div class="main-content">
   <div class="container-fluid">
-    <p>
-      emotions works!
-    </p>
-    <app-st></app-st>
+    <a [routerLink]="'users'">
+      <button mat-raised-button class="btn btn-danger">user</button>
+    </a>
+
+    <a [routerLink]="'roles'">
+      <button mat-raised-button class="btn btn-danger">role</button>
+    </a>
+
+    <app-st [data]="data" [columns]="columns"></app-st>
   </div>
 </div>

@@ -53,7 +53,7 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'load',           loadChildren: '../pages/emotions/emotions.module#EmotionsModule'},
+    { path: 'emotions',           loadChildren: '../pages/emotions/emotions.module#EmotionsModule'},
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },

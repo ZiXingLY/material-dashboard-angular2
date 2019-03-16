@@ -11,7 +11,6 @@ import {
 import {Observable, of} from 'rxjs';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {environment} from '../../environments/environment';
 import {SnackbarService} from './snackbar.service';
 
 @Injectable({
@@ -95,12 +94,14 @@ export class SweetHttpService implements HttpInterceptor {
         | HttpProgressEvent
         | HttpResponse<any>
         | HttpUserEvent<any>> {
+        return next.handle(req)
         // 通知服务每次调用网络请求刷新通知数
         // this.notify.refresh()
         // 统一加上服务端前缀
         let url = req.url;
         if (!url.startsWith('https://') && !url.startsWith('http://')) {
-            url = environment.SERVER_URL + url;
+            url = ROOT_URL + url;
+            // url = environment.SERVER_URL + url;
         }
 
 
@@ -152,10 +153,12 @@ export class SweetHttpService implements HttpInterceptor {
 
         return next.handle(newReq).pipe(
             mergeMap((event: any) => {
+                console.log(event);
                 // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
                 if (event instanceof HttpResponse && event.status === 200) {
                     return this.handleData(event);
                 }
+                console.log(event);
                 // 若一切都正常，则后续操作
                 return of(event);
             }),
